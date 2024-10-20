@@ -24,7 +24,7 @@ NEOMODEL_MAX_CONNECTION_POOL_SIZE = 50
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',]
 
 
 # Application definition
@@ -156,13 +156,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    'https://paqscompany.vercel.app', #company temporal
-    'https://paqs.vercel.app', #user temporal
-    "https://paqsbackend.up.railway.app", # backend url
-    "https://vercel.com",
     'http://127.0.0.1:8000',
-    'http://localhost:9000'
+    'http://localhost:3000'
 ]
+
+
 CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = True
@@ -177,9 +175,7 @@ CORS_ALLOW_CREDENTIALS = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://paqsbackend.up.railway.app', 
-    'https://paqscompany.vercel.app',
-    'https://paqs.vercel.app'
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -225,3 +221,10 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
 }
+
+
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_SID")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH")
+TWILIO_PHONE_NUMBER = os.environ.get("TWILIO_PHONE")
+TWILIO_CHANNEL = os.environ.get("TWILIO_CHANNEL")
+TWILIO_SERVICES = os.environ.get("TWILIO_SERVICES")

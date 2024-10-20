@@ -4,6 +4,7 @@ from django.conf import settings
 import random
 import time
 from django.core.cache import cache
+from .models import OTP
 
 OTP_EXPIRATION_TIME = 300  # 5 minutes
 MAX_OTP_ATTEMPTS = 3
@@ -11,7 +12,7 @@ MAX_OTP_ATTEMPTS = 3
 otp_storage = {}
 
 def send_otp(phone_number):
-    otp = random.randint(100000, 999999)
+    otp = OTP.create_otp(phone_number)
     cache.set(f"otp_{phone_number}", otp, timeout=OTP_EXPIRATION_TIME)
     cache.set(f"otp_attempts_{phone_number}", 0, timeout=OTP_EXPIRATION_TIME)
     # Integrate with SMS gateway like Twilio
